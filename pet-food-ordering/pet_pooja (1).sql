@@ -177,9 +177,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `phone`, `address`, `role`, `created_at`) VALUES
 (1, 'Admin', 'admin@example.com', 'admin123', '9876543210', 'Admin Office', 'admin', '2025-03-10 16:13:41'),
-(2, 'Sabale Pranav ', 'sabalepranav42@gmail.com', '123', '8788400806', 'Loni', 'user', '2025-03-10 16:14:08'),
-(3, 'Vikhe Sayali', 'vikhesayali@gmail.com', '123', '7559160257', 'Loni', 'user', '2025-03-28 16:41:26'),
-(4, 'Bhushan Aware', 'abc@gmail.com', '1234', '1234567890', 'wakad', 'user', '2025-09-04 10:36:43');
+(2, 'Sabale Pranav ', 'sabalepranav42@gmail.com', '123', '8788400806', 'Loni', 'user', '2025-03-10 16:14:08');
 
 --
 -- Indexes for dumped tables
