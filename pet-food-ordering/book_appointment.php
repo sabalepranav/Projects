@@ -5,8 +5,20 @@ include 'db.php'; // Include your database connection file
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_SESSION['user_id'] ?? NULL; // If logged in, get user ID
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+
+    $email = strtolower(trim($_POST['email']));
+
+    if (!preg_match("/^[a-z0-9._%+-]+@gmail\.com$/i", $email)) {
+        echo "<script>alert('Invalid email. Please use Valid Email ID !'); window.history.back();</script>";
+        exit;
+    }
+
+    $phone = trim($_POST['phone']);
+    if (!preg_match("/^[0-9]{10}$/", $phone)) {
+        echo "<script>alert('Phone number must be exactly 10 digits!'); window.history.back();</script>";
+        exit;
+    }
+    
     $service = $_POST['service'];
     $doctor_id = $_POST['doctor_id']; 
     $appointment_date = $_POST['appointment_date'];
@@ -24,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -139,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" name="name" required>
 
             <label>Email:</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" pattern="[a-z0-9._%+-]+@gmail\.com" required>
 
             <label>Phone:</label>
             <input type="text" name="phone" required>
