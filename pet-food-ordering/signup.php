@@ -4,9 +4,18 @@ include "db.php"; // Database Connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $email = strtolower(trim($_POST['email']));
+    if (!preg_match("/^[a-z0-9._%+-]+@gmail\.com$/i", $email)) {
+        echo "<script>alert('Invalid email. Please use Valid Email ID !'); window.history.back();</script>";
+        exit;
+    }
     $password = $_POST['password'];
-    $phone = $_POST['phone'];
+    
+    $phone = trim($_POST['phone']);
+    if (!preg_match("/^[0-9]{10}$/", $phone)) {
+        echo "<script>alert('Phone number must be exactly 10 digits!'); window.history.back();</script>";
+        exit;
+    }
     $address = $_POST['address'];
     
     // Default role is 'user'
