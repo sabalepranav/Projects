@@ -4,6 +4,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
+include 'db.php';
+
+$result = $conn->query("SELECT COUNT(*) as total FROM contact_messages");
+$row = $result->fetch_assoc();
+$count = $row['total'];
+
 ?>
 
 <!DOCTYPE html>
@@ -91,9 +97,45 @@ body {
 .orders { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('assets/orders.jpg'); }
 .users { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('assets/users.jpg'); }
 .appointment { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('assets/medical.jpg'); }
-        </style>
+        
+.notification {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px 15px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.notification:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.1);
+}
+
+/* 🔴 Badge (message count) */
+.badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+</style>
 </head>
 <body>
+    <a href="admin_messages.php" class="notification">
+        🔔
+        <span class="badge"><?php echo $count; ?></span>
+    </a>
     <div class="container">
         <h1 class="title">Welcome to Admin Dashboard</h1>
 
